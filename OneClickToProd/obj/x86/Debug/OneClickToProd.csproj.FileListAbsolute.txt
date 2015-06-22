@@ -1,0 +1,10 @@
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\OneClickToProd.exe.config
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\OneClickToProd.exe
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\OneClickToProd.pdb
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\SharpSvn.dll
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\SharpSvn.pdb
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\SharpSvn.xml
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\SharpPlink-Win32.svnExe
+F:\OneClickToProd\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.csprojResolveAssemblyReference.cache
+F:\OneClickToProd\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.exe
+F:\OneClickToProd\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.pdb
