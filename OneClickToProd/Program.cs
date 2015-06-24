@@ -11,7 +11,7 @@ namespace OneClickToProd
     {
         static void Main(string[] args)
         {
-            var svnVersion = createTag();
+            long svnVersion = createTag();
             Console.WriteLine("Quel est l'adresse du SSH?");
             var host = Console.ReadLine();
 
@@ -31,7 +31,7 @@ namespace OneClickToProd
             updateVersionInSQL(svnVersion);
         }
 
-        private static void updateVersionInSQL(string svnVersion)
+        private static void updateVersionInSQL(long svnVersion)
         {
             Console.WriteLine("Quel est la chaine de connexion?");
             var connexionString = Console.ReadLine();
@@ -73,8 +73,9 @@ namespace OneClickToProd
             client.Connect();
         }
 
-        private static void createTag()
+        private static long createTag()
         {
+            long svnVersion = 0;
             using (SvnClient client = new SvnClient())
             {
                 Console.WriteLine("Quel est l'adresse de source du SVN?");
@@ -85,7 +86,11 @@ namespace OneClickToProd
                 var uriDestination = Console.ReadLine();
                 var destination = new Uri(uriDestination);
                 client.RemoteCopy(source, destination);
+
+                SvnInfoEventArgs infos;
+                client.GetInfo(source, out infos);
             }
+            return svnVersion;
         }
     }
 }

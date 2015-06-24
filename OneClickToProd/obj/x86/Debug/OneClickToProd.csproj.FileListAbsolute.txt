@@ -8,3 +8,7 @@ F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\SharpPlink-Win32.svnEx
 F:\OneClickToProd\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.csprojResolveAssemblyReference.cache
 F:\OneClickToProd\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.exe
 F:\OneClickToProd\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.pdb
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\MySql.Data.dll
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\Renci.SshNet.dll
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\Renci.SshNet.pdb
+F:\OneClickToProd\OneClickToProd\OneClickToProd\bin\Debug\Renci.SshNet.xml
