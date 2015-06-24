@@ -11,7 +11,7 @@ namespace OneClickToProd
     {
         static void Main(string[] args)
         {
-            createTag();
+            var svnVersion = createTag();
             Console.WriteLine("Quel est l'adresse du SSH?");
             var host = Console.ReadLine();
 
@@ -28,12 +28,33 @@ namespace OneClickToProd
 
                 client.Disconnect();
             }
-            updateVersionInSQL();
+            updateVersionInSQL(svnVersion);
         }
 
-        private static void updateVersionInSQL()
+        private static void updateVersionInSQL(string svnVersion)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Quel est la chaine de connexion?");
+            var connexionString = Console.ReadLine();
+
+            using (var connexion = new MySql.Data.MySqlClient.MySqlConnection(connexionString))
+            {
+                try
+                {
+                    Console.WriteLine("Quel la base de donnée?");
+                    var database = Console.ReadLine();
+                    connexion.ChangeDatabase(database);
+
+                    var command = connexion.CreateCommand();
+                    command.CommandText = "UPDATE configuration SET version = @version";
+                    command.Parameters.Add("version", svnVersion);
+
+                    command.ExecuteNonQuery();
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+                    Console.WriteLine("Une erreur s'est produite lors de l'update SQL:" + ex.Message);
+                }                
+            }
         }
 
         private static void updateProject(SshClient client)
