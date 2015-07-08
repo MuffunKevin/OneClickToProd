@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using SharpSvn;
 using Renci.SshNet;
 
@@ -78,12 +79,21 @@ namespace OneClickToProd
             long svnVersion = 0;
             using (SvnClient client = new SvnClient())
             {
-                Console.WriteLine("Quel est l'adresse de source du SVN?");
-                var uriSource = Console.ReadLine();
-                var source = new SvnUriTarget(uriSource);
+                //ConfigurationManager.AppSettings["SVNSouce"];
+
+                var uriSource = ConfigurationManager.AppSettings[AppSettingKeys.SVNSource];
+
+                if (uriSource.isNullOrEmpty())
+                {
+                    Console.WriteLine("Quel est l'adresse de source du SVN?");
+                    uriSource = Console.ReadLine();
+                }
+                SvnUriTarget source;
+                SvnUriTarget.TryParse(uriSource, out source);
 
                 Console.WriteLine("Quel est l'adresse de destination du SVN?");
                 var uriDestination = Console.ReadLine();
+                
                 var destination = new Uri(uriDestination);
                 client.RemoteCopy(source, destination);
 
