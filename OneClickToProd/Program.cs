@@ -13,11 +13,22 @@ namespace OneClickToProd
         static void Main(string[] args)
         {
             long svnVersion = createTag();
-            Console.WriteLine("Quel est l'adresse du SSH?");
-            var host = Console.ReadLine();
 
-            Console.WriteLine("Quel est le nom d'usagé SSH?");
-            var userName = Console.ReadLine();
+            var host = ConfigurationManager.AppSettings[AppSettingKeys.SSHHost];
+
+            if (host.isNullOrEmpty())
+            {
+                Console.WriteLine("Quel est l'adresse du SSH?");
+                host = Console.ReadLine();
+            }
+
+            var userName = ConfigurationManager.AppSettings[AppSettingKeys.SSHUser];
+
+            if (host.isNullOrEmpty())
+            {
+                Console.WriteLine("Quel est le nom d'usagé SSH?");
+                userName = Console.ReadLine();
+            }
 
             Console.WriteLine("Quel est le mot de passe SSH?");
             var password = Console.ReadLine();
@@ -41,8 +52,13 @@ namespace OneClickToProd
             {
                 try
                 {
-                    Console.WriteLine("Quel la base de donnée?");
-                    var database = Console.ReadLine();
+                    var database = ConfigurationManager.AppSettings[AppSettingKeys.DatabaseName];
+
+                    if (database.isNullOrEmpty())
+                    {
+                        Console.WriteLine("Quel la base de donnée?");
+                        database = Console.ReadLine();
+                    }
                     connexion.ChangeDatabase(database);
 
                     var command = connexion.CreateCommand();
@@ -60,8 +76,13 @@ namespace OneClickToProd
 
         private static void updateProject(SshClient client)
         {
-            Console.WriteLine("Quel est le nom d'usager SVN?");
-            var userName = Console.ReadLine();
+            var userName = ConfigurationManager.AppSettings[AppSettingKeys.SVNUserName];
+
+            if (userName.isNullOrEmpty())
+            {
+                Console.WriteLine("Quel est le nom d'usager SVN?");
+                userName = Console.ReadLine();
+            }
 
             Console.WriteLine("Quel est le mot de passe SVN?");
             var password = Console.ReadLine();
@@ -79,8 +100,6 @@ namespace OneClickToProd
             long svnVersion = 0;
             using (SvnClient client = new SvnClient())
             {
-                //ConfigurationManager.AppSettings["SVNSouce"];
-
                 var uriSource = ConfigurationManager.AppSettings[AppSettingKeys.SVNSource];
 
                 if (uriSource.isNullOrEmpty())
