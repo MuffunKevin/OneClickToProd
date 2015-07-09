@@ -68,7 +68,7 @@ namespace OneClickToProd
 
                     var command = connexion.CreateCommand();
                     command.CommandText = "UPDATE configuration SET version = @version";
-                    command.Parameters.Add("version", svnVersion);
+                    command.Parameters.AddWithValue("version", svnVersion);
 
                     command.ExecuteNonQuery();
                 }
