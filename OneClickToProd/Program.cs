@@ -14,6 +14,12 @@ namespace OneClickToProd
         {
             long svnVersion = createTag();
 
+            updateDistantServer();
+            updateVersionInSQL(svnVersion);
+        }
+
+        private static void updateDistantServer()
+        {
             var host = ConfigurationManager.AppSettings[AppSettingKeys.SSHHost];
 
             if (host.isNullOrEmpty())
@@ -40,7 +46,6 @@ namespace OneClickToProd
 
                 client.Disconnect();
             }
-            updateVersionInSQL(svnVersion);
         }
 
         private static void updateVersionInSQL(long svnVersion)
