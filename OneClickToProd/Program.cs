@@ -10,6 +10,8 @@ namespace OneClickToProd
 {
     class Program
     {
+        private const string MySqlConnectionString = "Server={0};Database={1};Uid={2};Pwd={3};";
+
         static void Main(string[] args)
         {
             long svnVersion = createTag();
@@ -24,7 +26,7 @@ namespace OneClickToProd
 
             if (host.isNullOrEmpty())
             {
-                Console.WriteLine("Quel est l'adresse du SSH?");
+                Console.WriteLine(Resources.Questions.SSHAdresse);
                 host = Console.ReadLine();
             }
 
@@ -32,11 +34,11 @@ namespace OneClickToProd
 
             if (host.isNullOrEmpty())
             {
-                Console.WriteLine("Quel est le nom d'usagé SSH?");
+                Console.WriteLine(Resources.Questions.SSHUser);
                 userName = Console.ReadLine();
             }
 
-            Console.WriteLine("Quel est le mot de passe SSH?");
+            Console.WriteLine(Resources.Questions.SSHPassword);
             var password = Console.ReadLine();
 
             using (SshClient client = new SshClient(host, userName, password))
@@ -50,22 +52,36 @@ namespace OneClickToProd
 
         private static void updateVersionInSQL(long svnVersion)
         {
-            Console.WriteLine("Quel est la chaine de connexion?");
-            var connexionString = Console.ReadLine();
+            var mysqlHost = ConfigurationManager.AppSettings[AppSettingKeys.MySqlHost];
+            var mysqlUser = ConfigurationManager.AppSettings[AppSettingKeys.MySqlUser];
+            var mysqlDatabase = ConfigurationManager.AppSettings[AppSettingKeys.MySqlDatabase];
+
+            if (mysqlHost.isNullOrEmpty())
+            {
+                Console.WriteLine(Resources.Questions.MySQLHost);
+                mysqlHost = Console.ReadLine();
+            }
+
+            if (mysqlUser.isNullOrEmpty())
+            {
+                Console.WriteLine(Resources.Questions.MySQLUser);
+                mysqlUser = Console.ReadLine();
+            }
+
+            if (mysqlDatabase.isNullOrEmpty())
+            {
+                Console.WriteLine(Resources.Questions.MySQLDatabase);
+                mysqlDatabase = Console.ReadLine();
+            }
+
+            var mysqlPassword = Console.ReadLine();
+
+            var connexionString = string.Format(Program.MySqlConnectionString, mysqlHost, mysqlDatabase, mysqlUser, mysqlPassword);
 
             using (var connexion = new MySql.Data.MySqlClient.MySqlConnection(connexionString))
             {
                 try
                 {
-                    var database = ConfigurationManager.AppSettings[AppSettingKeys.DatabaseName];
-
-                    if (database.isNullOrEmpty())
-                    {
-                        Console.WriteLine("Quel la base de donnée?");
-                        database = Console.ReadLine();
-                    }
-                    connexion.ChangeDatabase(database);
-
                     var command = connexion.CreateCommand();
                     command.CommandText = "UPDATE configuration SET version = @version";
                     command.Parameters.AddWithValue("version", svnVersion);

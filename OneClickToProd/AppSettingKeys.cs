@@ -9,8 +9,10 @@ namespace OneClickToProd
     {
         public const string SVNSource = "SVNSource";
         public const string SVNUserName = "SVNUserName";
-        public const string DatabaseName = "DatabaseName";
         public const string SSHHost = "SSHHost";
         public const string SSHUser = "SSHUser";
+        public const string MySqlHost = "MySqlHost";
+        public const string MySqlUser = "MySqlUser";
+        public const string MySqlDatabase = "MySqlDatabase";
     }
 }
