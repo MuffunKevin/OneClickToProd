@@ -1,4 +1,0 @@
-F:\OneClickToProd\OneClickToProd\Renci.SshNet\bin\Debug\Renci.SshNet.dll
-F:\OneClickToProd\OneClickToProd\Renci.SshNet\bin\Debug\Renci.SshNet.pdb
-F:\OneClickToProd\OneClickToProd\Renci.SshNet\obj\Debug\Renci.SshNet.dll
-F:\OneClickToProd\OneClickToProd\Renci.SshNet\obj\Debug\Renci.SshNet.pdb
