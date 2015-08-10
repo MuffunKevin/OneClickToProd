@@ -135,4 +135,16 @@
   <data name="SSHUser" xml:space="preserve">
     <value>Quel est le nom d'usagé SSH?</value>
   </data>
+  <data name="SVNDestination" xml:space="preserve">
+    <value>Quel est l'adresse de destination du SVN?</value>
+  </data>
+  <data name="SVNPassword" xml:space="preserve">
+    <value>Quel est le mot de passe SVN?</value>
+  </data>
+  <data name="SVNSource" xml:space="preserve">
+    <value>Quel est l'adresse de source du SVN?</value>
+  </data>
+  <data name="SVNUser" xml:space="preserve">
+    <value>Quel est le nom d'usager SVN?</value>
+  </data>
 </root>

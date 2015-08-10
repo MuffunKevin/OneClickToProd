@@ -111,5 +111,40 @@ namespace OneClickToProd.Resources {
                 return ResourceManager.GetString("MySQLDatabase", resourceCulture);
             }
         }
+
+        internal static string SVNUser
+        {
+            get
+            {
+                return ResourceManager.GetString("SVNUser", resourceCulture);
+            }
+        }
+
+
+        internal static string SVNPassword
+        {
+            get
+            {
+                return ResourceManager.GetString("SVNPassword", resourceCulture);
+            }
+        }
+
+
+        internal static string SVNSource
+        {
+            get
+            {
+                return ResourceManager.GetString("SVNSource", resourceCulture);
+            }
+        }
+
+
+        internal static string SVNDestination
+        {
+            get
+            {
+                return ResourceManager.GetString("SVNDestination", resourceCulture);
+            }
+        }
     }
 }

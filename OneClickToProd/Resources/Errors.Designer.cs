@@ -59,5 +59,23 @@ namespace OneClickToProd.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Une erreur s&apos;est produite lors de l&apos;update SQL: {0}.
+        /// </summary>
+        internal static string MySqlUpdate {
+            get {
+                return ResourceManager.GetString("MySqlUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Impossible de lire la source de SVN.
+        /// </summary>
+        internal static string UnableToParseSVNSource {
+            get {
+                return ResourceManager.GetString("UnableToParseSVNSource", resourceCulture);
+            }
+        }
     }
 }

@@ -14,5 +14,6 @@ namespace OneClickToProd
         public const string MySqlHost = "MySqlHost";
         public const string MySqlUser = "MySqlUser";
         public const string MySqlDatabase = "MySqlDatabase";
+        public static string CreateSVNTag = "CreateSVNTag";
     }
 }

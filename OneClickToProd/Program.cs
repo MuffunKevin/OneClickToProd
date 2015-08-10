@@ -11,13 +11,66 @@ namespace OneClickToProd
     class Program
     {
         private const string MySqlConnectionString = "Server={0};Database={1};Uid={2};Pwd={3};";
+        private const string MySqlUpdate = "UPDATE configuration SET version = @version";
+        private const string MySqlVersion = "version";
+        private const string SVNCommand = "svn update --username '{0}' --password '{1}'";
 
         static void Main(string[] args)
         {
-            long svnVersion = createTag();
-
+            var svnVersion = doSVNOperation();
             updateDistantServer();
             updateVersionInSQL(svnVersion);
+        }
+
+        private static long doSVNOperation()
+        {
+            long svnVersion = 0;
+            using (SvnClient client = new SvnClient())
+            {
+                var uriSource = ConfigurationManager.AppSettings[AppSettingKeys.SVNSource];
+
+                if (uriSource.isNullOrEmpty())
+                {
+                    Console.WriteLine(Resources.Questions.SVNSource);
+                    uriSource = Console.ReadLine();
+                }
+
+                SvnUriTarget source;
+                if (SvnUriTarget.TryParse(uriSource, out source))
+                {
+                    var createSVNTagConfig = ConfigurationManager.AppSettings[AppSettingKeys.CreateSVNTag];
+
+                    if (bool.Parse(createSVNTagConfig))
+                    {
+                        createSVNTag(client, source);
+                    }
+                    getSVNVersion(client, source);
+                }
+                else
+                {
+                    throw new Exception(Resources.Errors.UnableToParseSVNSource);
+                }
+            }
+
+            return svnVersion;
+        }
+
+        private static void createSVNTag(SvnClient client, SvnUriTarget source)
+        {
+            Console.WriteLine(Resources.Questions.SVNDestination);
+            var uriDestination = Console.ReadLine();
+
+            var destination = new Uri(uriDestination);
+            client.RemoteCopy(source, destination);
+
+        }
+
+        private static long getSVNVersion(SvnClient client, SvnUriTarget source)
+        {
+            SvnInfoEventArgs infos;
+            client.GetInfo(source, out infos);
+
+            return 0;
         }
 
         private static void updateDistantServer()
@@ -83,15 +136,15 @@ namespace OneClickToProd
                 try
                 {
                     var command = connexion.CreateCommand();
-                    command.CommandText = "UPDATE configuration SET version = @version";
-                    command.Parameters.AddWithValue("version", svnVersion);
+                    command.CommandText = Program.MySqlUpdate;
+                    command.Parameters.AddWithValue(Program.MySqlVersion, svnVersion);
 
                     command.ExecuteNonQuery();
                 }
                 catch (MySql.Data.MySqlClient.MySqlException ex)
                 {
-                    Console.WriteLine("Une erreur s'est produite lors de l'update SQL:" + ex.Message);
-                }                
+                    Console.WriteLine(string.Format(Resources.Errors.MySqlUpdate, ex.Message));
+                }
             }
         }
 
@@ -101,46 +154,19 @@ namespace OneClickToProd
 
             if (userName.isNullOrEmpty())
             {
-                Console.WriteLine("Quel est le nom d'usager SVN?");
+                Console.WriteLine(Resources.Questions.SVNUser);
                 userName = Console.ReadLine();
             }
 
-            Console.WriteLine("Quel est le mot de passe SVN?");
+            Console.WriteLine(Resources.Questions.SVNPassword);
             var password = Console.ReadLine();
 
-            client.RunCommand(string.Format("svn update --username '{0}' --password '{1}'", userName, password));
+            client.RunCommand(string.Format(Program.SVNCommand, userName, password));
         }
 
         private static void connectSSH(SshClient client)
         {
             client.Connect();
-        }
-
-        private static long createTag()
-        {
-            long svnVersion = 0;
-            using (SvnClient client = new SvnClient())
-            {
-                var uriSource = ConfigurationManager.AppSettings[AppSettingKeys.SVNSource];
-
-                if (uriSource.isNullOrEmpty())
-                {
-                    Console.WriteLine("Quel est l'adresse de source du SVN?");
-                    uriSource = Console.ReadLine();
-                }
-                SvnUriTarget source;
-                SvnUriTarget.TryParse(uriSource, out source);
-
-                Console.WriteLine("Quel est l'adresse de destination du SVN?");
-                var uriDestination = Console.ReadLine();
-                
-                var destination = new Uri(uriDestination);
-                client.RemoteCopy(source, destination);
-
-                SvnInfoEventArgs infos;
-                client.GetInfo(source, out infos);
-            }
-            return svnVersion;
         }
     }
 }
