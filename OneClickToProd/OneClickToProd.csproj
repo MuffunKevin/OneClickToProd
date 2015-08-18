@@ -83,6 +83,11 @@
     </Compile>
     <Compile Include="Resources\Questions.Designer.cs" />
     <Compile Include="Resources\Questions.fr.Designer.cs" />
+    <Compile Include="Resources\UILogging.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UILogging.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -117,6 +122,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Questions.fr.resx" />
     <EmbeddedResource Include="Resources\Questions.resx" />
+    <EmbeddedResource Include="Resources\UILogging.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UILogging.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

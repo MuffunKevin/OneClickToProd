@@ -30,3 +30,4 @@ C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToP
 C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\bin\Debug\fr\OneClickToProd.resources.dll
 C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Debug\fr\OneClickToProd.resources.dll
 C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.Resources.Errors.resources
+C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Debug\OneClickToProd.Resources.UILogging.resources

@@ -40,11 +40,15 @@ namespace OneClickToProd
                 {
                     var createSVNTagConfig = ConfigurationManager.AppSettings[AppSettingKeys.CreateSVNTag];
 
-                    if (bool.Parse(createSVNTagConfig))
+                    bool mustcreateSVNTag;
+                    if (bool.TryParse(createSVNTagConfig, out mustcreateSVNTag))
                     {
-                        createSVNTag(client, source);
+                        if (mustcreateSVNTag)
+                        {
+                            createSVNTag(client, source);
+                        }
                     }
-                    getSVNVersion(client, source);
+                    svnVersion = getSVNVersion(client, source);
                 }
                 else
                 {
@@ -57,20 +61,28 @@ namespace OneClickToProd
 
         private static void createSVNTag(SvnClient client, SvnUriTarget source)
         {
+            ConsoleLogStartAction(Resources.UILogging.CreateSvnTag);
+
             Console.WriteLine(Resources.Questions.SVNDestination);
             var uriDestination = Console.ReadLine();
 
             var destination = new Uri(uriDestination);
             client.RemoteCopy(source, destination);
 
+            ConsoleEndAction();
+
         }
 
         private static long getSVNVersion(SvnClient client, SvnUriTarget source)
         {
+            ConsoleLogStartAction(Resources.UILogging.GetSvnVersion);
+
             SvnInfoEventArgs infos;
             client.GetInfo(source, out infos);
 
-            return 0;
+            ConsoleEndAction();
+
+            return infos.Revision;
         }
 
         private static void updateDistantServer()
@@ -98,13 +110,53 @@ namespace OneClickToProd
             {
                 connectSSH(client);
                 updateProject(client);
-
-                client.Disconnect();
+                disconnectSSH(client);
+                
             }
+        }
+
+        private static void disconnectSSH(SshClient client)
+        {
+            ConsoleLogStartAction(Resources.UILogging.DisconnectSSH);
+
+            client.Disconnect();
+
+            ConsoleEndAction();
+        }
+
+        private static void updateProject(SshClient client)
+        {
+            ConsoleLogStartAction(Resources.UILogging.UpdateSVN);
+
+            var userName = ConfigurationManager.AppSettings[AppSettingKeys.SVNUserName];
+
+            if (userName.isNullOrEmpty())
+            {
+                Console.WriteLine(Resources.Questions.SVNUser);
+                userName = Console.ReadLine();
+            }
+
+            Console.WriteLine(Resources.Questions.SVNPassword);
+            var password = Console.ReadLine();
+
+            client.RunCommand(string.Format(Program.SVNCommand, userName, password));
+            
+            ConsoleEndAction();
+        }
+
+        private static void connectSSH(SshClient client)
+        {
+            ConsoleLogStartAction(Resources.UILogging.ConnectSSH);
+
+            client.Connect();
+
+            ConsoleEndAction();
         }
 
         private static void updateVersionInSQL(long svnVersion)
         {
+            ConsoleLogStartAction(Resources.UILogging.UpdateSQL);
+
             var mysqlHost = ConfigurationManager.AppSettings[AppSettingKeys.MySqlHost];
             var mysqlUser = ConfigurationManager.AppSettings[AppSettingKeys.MySqlUser];
             var mysqlDatabase = ConfigurationManager.AppSettings[AppSettingKeys.MySqlDatabase];
@@ -146,27 +198,17 @@ namespace OneClickToProd
                     Console.WriteLine(string.Format(Resources.Errors.MySqlUpdate, ex.Message));
                 }
             }
+            ConsoleEndAction();
         }
 
-        private static void updateProject(SshClient client)
+        private static void ConsoleEndAction()
         {
-            var userName = ConfigurationManager.AppSettings[AppSettingKeys.SVNUserName];
-
-            if (userName.isNullOrEmpty())
-            {
-                Console.WriteLine(Resources.Questions.SVNUser);
-                userName = Console.ReadLine();
-            }
-
-            Console.WriteLine(Resources.Questions.SVNPassword);
-            var password = Console.ReadLine();
-
-            client.RunCommand(string.Format(Program.SVNCommand, userName, password));
+            Console.Write(Resources.UILogging.Done + Environment.NewLine);
         }
 
-        private static void connectSSH(SshClient client)
+        private static void ConsoleLogStartAction(string p)
         {
-            client.Connect();
+            Console.Write(p + Resources.UILogging.Spacer);
         }
     }
 }
