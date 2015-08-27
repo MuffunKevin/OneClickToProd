@@ -61,6 +61,15 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed, hit a key to close this console..
+        /// </summary>
+        internal static string Completed {
+            get {
+                return ResourceManager.GetString("Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connect to SSH.
         /// </summary>
         internal static string ConnectSSH {

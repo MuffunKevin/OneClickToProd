@@ -11,7 +11,7 @@ namespace OneClickToProd
     class Program
     {
         private const string MySqlConnectionString = "Server={0};Database={1};Uid={2};Pwd={3};";
-        private const string MySqlUpdate = "UPDATE configuration SET version = @version";
+        private const string MySqlUpdate = "UPDATE configuration SET svnVersion = @version";
         private const string MySqlVersion = "version";
         private const string SVNCommand = "svn update --username '{0}' --password '{1}'";
 
@@ -20,6 +20,9 @@ namespace OneClickToProd
             var svnVersion = doSVNOperation();
             updateDistantServer();
             updateVersionInSQL(svnVersion);
+
+            Console.WriteLine(Resources.UILogging.Completed);
+            Console.ReadLine();
         }
 
         private static long doSVNOperation()
@@ -181,6 +184,7 @@ namespace OneClickToProd
                 mysqlDatabase = Console.ReadLine();
             }
 
+            Console.WriteLine(Resources.Questions.MySQLPassword);
             var mysqlPassword = Console.ReadLine();
 
             var connexionString = string.Format(Program.MySqlConnectionString, mysqlHost, mysqlDatabase, mysqlUser, mysqlPassword);
@@ -189,11 +193,14 @@ namespace OneClickToProd
             {
                 try
                 {
+                    connexion.Open();
                     var command = connexion.CreateCommand();
                     command.CommandText = Program.MySqlUpdate;
                     command.Parameters.AddWithValue(Program.MySqlVersion, svnVersion);
 
                     command.ExecuteNonQuery();
+
+                    connexion.Close();
                 }
                 catch (MySql.Data.MySqlClient.MySqlException ex)
                 {
@@ -210,7 +217,7 @@ namespace OneClickToProd
 
         private static void ConsoleLogStartAction(string p)
         {
-            Console.Write(p + Resources.UILogging.Spacer);
+            Console.Write(p + Resources.UILogging.Spacer + Environment.NewLine);
         }
     }
 }

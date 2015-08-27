@@ -123,6 +123,9 @@
   <data name="MySQLHost" xml:space="preserve">
     <value>Quel est l'adresse de la base de donnée?</value>
   </data>
+  <data name="MySQLPassword" xml:space="preserve">
+    <value>Quel est le mot de passe de la base de donée?</value>
+  </data>
   <data name="MySQLUser" xml:space="preserve">
     <value>Quel les nom d'usager de la base de donnée?</value>
   </data>

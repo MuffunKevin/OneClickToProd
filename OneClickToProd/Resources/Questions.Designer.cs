@@ -112,6 +112,14 @@ namespace OneClickToProd.Resources {
             }
         }
 
+        internal static string MySQLPassword
+        {
+            get
+            {
+                return ResourceManager.GetString("MySQLPassword", resourceCulture);
+            }
+        }
+
         internal static string SVNUser
         {
             get
