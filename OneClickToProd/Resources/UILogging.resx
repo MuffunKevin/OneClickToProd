@@ -129,6 +129,9 @@
   <data name="Done" xml:space="preserve">
     <value>Done</value>
   </data>
+  <data name="FoundSVNVersion" xml:space="preserve">
+    <value>Found version {0}</value>
+  </data>
   <data name="GetSvnVersion" xml:space="preserve">
     <value>Get the svn version</value>
   </data>

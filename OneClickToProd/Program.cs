@@ -79,6 +79,8 @@ namespace OneClickToProd
 
             SvnInfoEventArgs infos;
             client.GetInfo(source, out infos);
+            
+            Console.WriteLine(string.Format(Resources.UILogging.FoundSVNVersion, infos.Revision));
 
             ConsoleEndAction();
 
@@ -97,7 +99,7 @@ namespace OneClickToProd
 
             var userName = ConfigurationManager.AppSettings[AppSettingKeys.SSHUser];
 
-            if (host.isNullOrEmpty())
+            if (userName.isNullOrEmpty())
             {
                 Console.WriteLine(Resources.Questions.SSHUser);
                 userName = Console.ReadLine();

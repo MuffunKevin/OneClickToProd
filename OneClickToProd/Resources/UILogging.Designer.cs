@@ -97,6 +97,15 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Found version {0}.
+        /// </summary>
+        internal static string FoundSVNVersion {
+            get {
+                return ResourceManager.GetString("FoundSVNVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get the svn version.
         /// </summary>
         internal static string GetSvnVersion {
