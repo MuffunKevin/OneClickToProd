@@ -1,7 +1,7 @@
 # OneClickToProd
 On stop app to publish a new version of a web site manage by SVN and host on a Linux server
 
-## How it (suposed to) work
+## How it work
 
 1. Connect with SSH on the remote hosting server
 2. SVN update file on this server
