@@ -17,11 +17,23 @@ namespace OneClickToProd
 
         static void Main(string[] args)
         {
-            var svnVersion = doSVNOperation();
-            updateDistantServer();
-            updateVersionInSQL(svnVersion);
-
-            Console.WriteLine(Resources.UILogging.Completed);
+            try
+            {
+                var svnVersion = doSVNOperation();
+                updateDistantServer();
+                updateVersionInSQL(svnVersion);
+                Console.WriteLine(Resources.UILogging.Completed);
+            }
+            catch (Exception ex)
+            {
+                var baseColor = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(Resources.UILogging.AnErrorOccured);
+                Console.ForegroundColor = baseColor;
+                Console.WriteLine(ex.Message);
+            }
+            
+            
             Console.ReadLine();
         }
 

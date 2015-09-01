@@ -61,6 +61,15 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while updating:.
+        /// </summary>
+        internal static string AnErrorOccured {
+            get {
+                return ResourceManager.GetString("AnErrorOccured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completed, hit a key to close this console..
         /// </summary>
         internal static string Completed {
