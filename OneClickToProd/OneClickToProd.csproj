@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="base.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
