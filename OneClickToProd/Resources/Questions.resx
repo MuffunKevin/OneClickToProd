@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MySQLDatabase" xml:space="preserve">
-    <value>Quel est le nom de la base de donnée?</value>
+    <value>What is the database name?</value>
   </data>
   <data name="MySQLHost" xml:space="preserve">
-    <value>Quel est l'adresse de la base de donnée?</value>
+    <value>what is the URL/IP Address of the database?</value>
   </data>
   <data name="MySQLPassword" xml:space="preserve">
-    <value>Quel est le mot de passe de la base de donée?</value>
+    <value>What is the database password?</value>
   </data>
   <data name="MySQLUser" xml:space="preserve">
-    <value>Quel les nom d'usager de la base de donnée?</value>
+    <value>What is the database username?</value>
   </data>
   <data name="SSHAdresse" xml:space="preserve">
-    <value>Quel est l'adresse du SSH?</value>
+    <value>What is the SSH URL/Ip Address?</value>
   </data>
   <data name="SSHPassword" xml:space="preserve">
-    <value>Quel est le mot de passe SSH?</value>
+    <value>What is the SSH password?</value>
   </data>
   <data name="SSHUser" xml:space="preserve">
-    <value>Quel est le nom d'usagé SSH?</value>
+    <value>What is the SSH username?</value>
   </data>
   <data name="SVNDestination" xml:space="preserve">
-    <value>Quel est l'adresse de destination du SVN?</value>
+    <value>What is the destination address of the SVN?</value>
   </data>
   <data name="SVNPassword" xml:space="preserve">
-    <value>Quel est le mot de passe SVN?</value>
+    <value>What is the SVN password?</value>
   </data>
   <data name="SVNSource" xml:space="preserve">
-    <value>Quel est l'adresse de source du SVN?</value>
+    <value>What is the source address of the SVN?</value>
   </data>
   <data name="SVNUser" xml:space="preserve">
-    <value>Quel est le nom d'usager SVN?</value>
+    <value>What is the SVN username?</value>
   </data>
 </root>
