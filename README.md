@@ -23,6 +23,14 @@ All requested addresses and credentials are customizable in the OneClickToProd.e
 * `SSHHost`: The address of the SSH server
 * `SSHUser`: The SSH user.
 
+## Application arguments
+
+It's possible to pass arguments to the application. Arguments are build like this config=projectfile
+
+### `config`
+
+The configuration to use in the application excecution. If the new config file is withing the same folder as the application, the path to the file is optional. An empty config file can be found in [base.config].
+
 ## Credits
 This project is made using these 3rd party tools:
 
