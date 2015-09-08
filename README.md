@@ -29,7 +29,11 @@ It's possible to pass arguments to the application. Arguments are build like thi
 
 ### `config`
 
-The configuration to use in the application excecution. If the new config file is withing the same folder as the application, the path to the file is optional. An empty config file can be found in [base.config].
+The configuration to use in the application excecution. If the new config file is withing the same folder as the application, the path to the file is optional. An empty config file can be found in [base.config](https://github.com/MuffunKevin/OneClickToProd/blob/master/OneClickToProd/base.config).
+
+```bash
+OneClickToProd.exe config=abc.config
+```
 
 ## Credits
 This project is made using these 3rd party tools:
