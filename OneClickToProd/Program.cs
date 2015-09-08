@@ -19,6 +19,8 @@ namespace OneClickToProd
         {
             try
             {
+                loadConfigFile(args);
+
                 var svnVersion = doSVNOperation();
                 updateDistantServer();
                 updateVersionInSQL(svnVersion);
@@ -32,9 +34,29 @@ namespace OneClickToProd
                 Console.ForegroundColor = baseColor;
                 Console.WriteLine(ex.Message);
             }
-            
-            
+
+
             Console.ReadLine();
+        }
+
+        private static void loadConfigFile(string [] args)
+        {
+            if (args.Any(a => a.Contains("config")))
+            {
+                var splitter = new[] { "=" };
+                var runtimeconfigfile = args.Where(a => a.Contains("config")).First().Split(splitter, StringSplitOptions.RemoveEmptyEntries).Last();
+                if (System.IO.File.Exists(runtimeconfigfile))
+                {
+                    System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    config.AppSettings.File = runtimeconfigfile;
+                    config.Save(ConfigurationSaveMode.Modified);
+                    ConfigurationManager.RefreshSection("appSettings");
+                }
+                else
+                {
+                    throw new Exception(Resources.Errors.ConfigFileNotFound);
+                }                
+            }
         }
 
         private static long doSVNOperation()
@@ -94,7 +116,7 @@ namespace OneClickToProd
 
             SvnInfoEventArgs infos;
             client.GetInfo(source, out infos);
-            
+
             Console.WriteLine(string.Format(Resources.UILogging.FoundSVNVersion, infos.Revision));
 
             ConsoleEndAction();
@@ -128,7 +150,7 @@ namespace OneClickToProd
                 connectSSH(client);
                 updateProject(client);
                 disconnectSSH(client);
-                
+
             }
         }
 
@@ -157,7 +179,7 @@ namespace OneClickToProd
             var password = Console.ReadLine();
 
             client.RunCommand(string.Format(Program.SVNCommand, userName, password));
-            
+
             ConsoleEndAction();
         }
 

@@ -1,0 +1,6 @@
+C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\bin\Release\OneClickToProd.exe.config
+C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Release\OneClickToProd.Resources.Errors.resources
+C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Release\OneClickToProd.Resources.Questions.resources
+C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Release\OneClickToProd.Resources.UILogging.resources
+C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Release\OneClickToProd.Resources.Questions.fr.resources
+C:\Users\kevin.bergeron.CELLULAIREPLUS\Desktop\GitHub\OneClickToProd\OneClickToProd\obj\x86\Release\OneClickToProd.csproj.GenerateResource.Cache

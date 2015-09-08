@@ -61,6 +61,15 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Le fichier de configuration fournis n&apos;est pas trouvé..
+        /// </summary>
+        internal static string ConfigFileNotFound {
+            get {
+                return ResourceManager.GetString("ConfigFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Une erreur s&apos;est produite lors de l&apos;update SQL: {0}.
         /// </summary>
         internal static string MySqlUpdate {
