@@ -124,13 +124,13 @@
     <value>Completed, hit a key to close this console.</value>
   </data>
   <data name="ConnectSSH" xml:space="preserve">
-    <value>Connect to SSH</value>
+    <value>Connecting to SSH</value>
   </data>
   <data name="CreateSvnTag" xml:space="preserve">
-    <value>Creation du tag SVN</value>
+    <value>Creating SVN tag</value>
   </data>
   <data name="DisconnectSSH" xml:space="preserve">
-    <value>Disconnect of SSH</value>
+    <value>Disconnecting from SSH</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Done</value>
@@ -139,15 +139,15 @@
     <value>Found version {0}</value>
   </data>
   <data name="GetSvnVersion" xml:space="preserve">
-    <value>Get the svn version</value>
+    <value>Getting the SVN repo version</value>
   </data>
   <data name="Spacer" xml:space="preserve">
     <value>...</value>
   </data>
   <data name="UpdateSQL" xml:space="preserve">
-    <value>Update SQL version</value>
+    <value>Updating SQL version</value>
   </data>
   <data name="UpdateSVN" xml:space="preserve">
-    <value>Update SVN version</value>
+    <value>Updating SVN version</value>
   </data>
 </root>
