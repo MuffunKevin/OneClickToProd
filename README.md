@@ -31,6 +31,10 @@ It's possible to pass arguments to the application. Arguments are build like thi
 
 The configuration to use in the application excecution. If the new config file is withing the same folder as the application, the path to the file is optional. An empty config file can be found in [base.config](https://github.com/MuffunKevin/OneClickToProd/blob/master/OneClickToProd/base.config).
 
+Spécification: 
+* If the file is not valid or its path is wrong, the application will throw an error. 
+* If a config parameter is provided, the application won't use the default configuration file to ensure your SVN repositories are safe.
+
 ```bash
 OneClickToProd.exe config=abc.config
 ```
