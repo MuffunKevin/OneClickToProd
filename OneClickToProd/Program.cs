@@ -36,10 +36,11 @@ namespace OneClickToProd
                 Console.ForegroundColor = baseColor;
                 Console.WriteLine(ex.Message);
             }
-
-
-            Console.WriteLine(Resources.UILogging.PressAKey);
-            Console.ReadLine();
+            finally
+            {
+                Console.WriteLine(Resources.UILogging.PressAKey);
+                Console.ReadLine();
+            }
         }
 
         private static void loadConfigFile(string[] args)
