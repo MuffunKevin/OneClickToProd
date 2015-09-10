@@ -141,6 +141,9 @@
   <data name="GetSvnVersion" xml:space="preserve">
     <value>Getting the SVN repo version</value>
   </data>
+  <data name="PressAKey" xml:space="preserve">
+    <value>Press a key to close this app.</value>
+  </data>
   <data name="Spacer" xml:space="preserve">
     <value>...</value>
   </data>

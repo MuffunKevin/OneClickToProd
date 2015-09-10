@@ -79,7 +79,7 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connect to SSH.
+        ///   Looks up a localized string similar to Connecting to SSH.
         /// </summary>
         internal static string ConnectSSH {
             get {
@@ -88,7 +88,7 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creation du tag SVN.
+        ///   Looks up a localized string similar to Creating SVN tag.
         /// </summary>
         internal static string CreateSvnTag {
             get {
@@ -97,7 +97,7 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disconnect of SSH.
+        ///   Looks up a localized string similar to Disconnecting from SSH.
         /// </summary>
         internal static string DisconnectSSH {
             get {
@@ -124,11 +124,20 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get the svn version.
+        ///   Looks up a localized string similar to Getting the SVN repo version.
         /// </summary>
         internal static string GetSvnVersion {
             get {
                 return ResourceManager.GetString("GetSvnVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press a key to close this app..
+        /// </summary>
+        internal static string PressAKey {
+            get {
+                return ResourceManager.GetString("PressAKey", resourceCulture);
             }
         }
         
@@ -142,7 +151,7 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update SQL version.
+        ///   Looks up a localized string similar to Updating SQL version.
         /// </summary>
         internal static string UpdateSQL {
             get {
@@ -151,7 +160,7 @@ namespace OneClickToProd.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update SVN version.
+        ///   Looks up a localized string similar to Updating SVN version.
         /// </summary>
         internal static string UpdateSVN {
             get {

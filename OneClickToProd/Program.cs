@@ -6,6 +6,7 @@ using System.Configuration;
 using SharpSvn;
 using Renci.SshNet;
 using System.Security;
+using System.Runtime.InteropServices;
 
 namespace OneClickToProd
 {
@@ -37,6 +38,7 @@ namespace OneClickToProd
             }
 
 
+            Console.WriteLine(Resources.UILogging.PressAKey);
             Console.ReadLine();
         }
 
@@ -146,7 +148,7 @@ namespace OneClickToProd
             Console.WriteLine(Resources.Questions.SSHPassword);
             using (SecureString password = GetPassword())
             {
-                using (SshClient client = new SshClient(host, userName, password.ToString()))
+                using (SshClient client = new SshClient(host, userName, password.ConvertToUnsecureString()))
                 {
                     connectSSH(client);
                     updateProject(client);
@@ -180,7 +182,7 @@ namespace OneClickToProd
             Console.WriteLine(Resources.Questions.SVNPassword);
             using (SecureString password = GetPassword())
             {
-                client.RunCommand(string.Format(Program.SVNCommand, userName, password.ToString()));
+                client.RunCommand(string.Format(Program.SVNCommand, userName, password.ConvertToUnsecureString()));
             }
 
             ConsoleEndAction();
@@ -226,7 +228,7 @@ namespace OneClickToProd
             var connexionString = string.Empty;
             using (SecureString mysqlPassword = GetPassword())
             {
-                connexionString = string.Format(Program.MySqlConnectionString, mysqlHost, mysqlDatabase, mysqlUser, mysqlPassword);
+                connexionString = string.Format(Program.MySqlConnectionString, mysqlHost, mysqlDatabase, mysqlUser, mysqlPassword.ConvertToUnsecureString());
 
                 using (var connexion = new MySql.Data.MySqlClient.MySqlConnection(connexionString))
                 {
@@ -285,8 +287,9 @@ namespace OneClickToProd
                 }
             }
 
+            pwd.MakeReadOnly();
             Console.WriteLine();
             return pwd;
         }
-    }
+    }     
 }
