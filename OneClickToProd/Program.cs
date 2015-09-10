@@ -5,6 +5,7 @@ using System.Text;
 using System.Configuration;
 using SharpSvn;
 using Renci.SshNet;
+using System.Security;
 
 namespace OneClickToProd
 {
@@ -39,7 +40,7 @@ namespace OneClickToProd
             Console.ReadLine();
         }
 
-        private static void loadConfigFile(string [] args)
+        private static void loadConfigFile(string[] args)
         {
             if (args.Any(a => a.Contains("config")))
             {
@@ -55,7 +56,7 @@ namespace OneClickToProd
                 else
                 {
                     throw new Exception(Resources.Errors.ConfigFileNotFound);
-                }                
+                }
             }
         }
 
@@ -143,14 +144,15 @@ namespace OneClickToProd
             }
 
             Console.WriteLine(Resources.Questions.SSHPassword);
-            var password = Console.ReadLine();
-
-            using (SshClient client = new SshClient(host, userName, password))
+            using (SecureString password = GetPassword())
             {
-                connectSSH(client);
-                updateProject(client);
-                disconnectSSH(client);
+                using (SshClient client = new SshClient(host, userName, password.ToString()))
+                {
+                    connectSSH(client);
+                    updateProject(client);
+                    disconnectSSH(client);
 
+                }
             }
         }
 
@@ -176,9 +178,10 @@ namespace OneClickToProd
             }
 
             Console.WriteLine(Resources.Questions.SVNPassword);
-            var password = Console.ReadLine();
-
-            client.RunCommand(string.Format(Program.SVNCommand, userName, password));
+            using (SecureString password = GetPassword())
+            {
+                client.RunCommand(string.Format(Program.SVNCommand, userName, password.ToString()));
+            }
 
             ConsoleEndAction();
         }
@@ -219,26 +222,29 @@ namespace OneClickToProd
             }
 
             Console.WriteLine(Resources.Questions.MySQLPassword);
-            var mysqlPassword = Console.ReadLine();
 
-            var connexionString = string.Format(Program.MySqlConnectionString, mysqlHost, mysqlDatabase, mysqlUser, mysqlPassword);
-
-            using (var connexion = new MySql.Data.MySqlClient.MySqlConnection(connexionString))
+            var connexionString = string.Empty;
+            using (SecureString mysqlPassword = GetPassword())
             {
-                try
-                {
-                    connexion.Open();
-                    var command = connexion.CreateCommand();
-                    command.CommandText = Program.MySqlUpdate;
-                    command.Parameters.AddWithValue(Program.MySqlVersion, svnVersion);
+                connexionString = string.Format(Program.MySqlConnectionString, mysqlHost, mysqlDatabase, mysqlUser, mysqlPassword);
 
-                    command.ExecuteNonQuery();
-
-                    connexion.Close();
-                }
-                catch (MySql.Data.MySqlClient.MySqlException ex)
+                using (var connexion = new MySql.Data.MySqlClient.MySqlConnection(connexionString))
                 {
-                    Console.WriteLine(string.Format(Resources.Errors.MySqlUpdate, ex.Message));
+                    try
+                    {
+                        connexion.Open();
+                        var command = connexion.CreateCommand();
+                        command.CommandText = Program.MySqlUpdate;
+                        command.Parameters.AddWithValue(Program.MySqlVersion, svnVersion);
+
+                        command.ExecuteNonQuery();
+
+                        connexion.Close();
+                    }
+                    catch (MySql.Data.MySqlClient.MySqlException ex)
+                    {
+                        Console.WriteLine(string.Format(Resources.Errors.MySqlUpdate, ex.Message));
+                    }
                 }
             }
             ConsoleEndAction();
@@ -252,6 +258,35 @@ namespace OneClickToProd
         private static void ConsoleLogStartAction(string p)
         {
             Console.Write(p + Resources.UILogging.Spacer + Environment.NewLine);
+        }
+
+        public static SecureString GetPassword()
+        {
+            SecureString pwd = new SecureString();
+            while (true)
+            {
+                ConsoleKeyInfo i = Console.ReadKey(true);
+                if (i.Key == ConsoleKey.Enter)
+                {
+                    break;
+                }
+                else if (i.Key == ConsoleKey.Backspace)
+                {
+                    if (pwd.Length > 0)
+                    {
+                        pwd.RemoveAt(pwd.Length - 1);
+                        Console.Write("\b \b");
+                    }
+                }
+                else
+                {
+                    pwd.AppendChar(i.KeyChar);
+                    Console.Write("*");
+                }
+            }
+
+            Console.WriteLine();
+            return pwd;
         }
     }
 }
