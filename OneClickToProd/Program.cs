@@ -49,6 +49,13 @@ namespace OneClickToProd
             {
                 var splitter = new[] { "=" };
                 var runtimeconfigfile = args.Where(a => a.Contains("config")).First().Split(splitter, StringSplitOptions.RemoveEmptyEntries).Last();
+
+                if(System.IO.Directory.Exists("Configs")){
+                    runtimeconfigfile = Environment.CurrentDirectory + "\\Config\\" + runtimeconfigfile;
+                } else if(System.IO.Directory.Exists("configs")) {
+                    runtimeconfigfile = Environment.CurrentDirectory + "\\config\\" + runtimeconfigfile;
+                }
+
                 if (System.IO.File.Exists(runtimeconfigfile))
                 {
                     System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
