@@ -50,6 +50,11 @@ namespace OneClickToProd
                 var splitter = new[] { "=" };
                 var runtimeconfigfile = args.Where(a => a.Contains("config")).First().Split(splitter, StringSplitOptions.RemoveEmptyEntries).Last();
 
+                if (!runtimeconfigfile.Contains(".config"))
+                {
+                    runtimeconfigfile = runtimeconfigfile + ".config";
+                }
+
                 if(System.IO.Directory.Exists("Configs")){
                     runtimeconfigfile = Environment.CurrentDirectory + "\\Configs\\" + runtimeconfigfile;
                 } else if(System.IO.Directory.Exists("configs")) {
@@ -67,6 +72,21 @@ namespace OneClickToProd
                 {
                     throw new Exception(Resources.Errors.ConfigFileNotFound);
                 }
+            }
+            else
+            {
+                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                if (System.IO.Directory.Exists("Configs"))
+                {
+                    config.AppSettings.File = Environment.CurrentDirectory + "\\Configs\\base.config";
+                }
+                else if (System.IO.Directory.Exists("configs"))
+                {
+                    config.AppSettings.File = Environment.CurrentDirectory + "\\configs\\base.config";
+                }
+                //config.AppSettings.File = "base.config";
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("appSettings");
             }
         }
 
