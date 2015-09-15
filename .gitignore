@@ -45,5 +45,3 @@ Temporary Items
 #configs folder
 */bin/Debug/configs/*.config
 */bin/Release/configs/*.config
-!*/bin/Release/configs/base.config
-!*/bin/Debug/configs/base.config

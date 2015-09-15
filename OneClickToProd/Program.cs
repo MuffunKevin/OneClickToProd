@@ -50,11 +50,6 @@ namespace OneClickToProd
                 var splitter = new[] { "=" };
                 var runtimeconfigfile = args.Where(a => a.Contains("config")).First().Split(splitter, StringSplitOptions.RemoveEmptyEntries).Last();
 
-                if (!runtimeconfigfile.Contains(".config"))
-                {
-                    runtimeconfigfile = runtimeconfigfile + ".config";
-                }
-
                 if(System.IO.Directory.Exists("Configs")){
                     runtimeconfigfile = Environment.CurrentDirectory + "\\Configs\\" + runtimeconfigfile;
                 } else if(System.IO.Directory.Exists("configs")) {
@@ -72,31 +67,6 @@ namespace OneClickToProd
                 {
                     throw new Exception(Resources.Errors.ConfigFileNotFound);
                 }
-            }
-            else
-            {
-                System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                if (System.IO.Directory.Exists("Configs"))
-                {
-                    config.AppSettings.File = Environment.CurrentDirectory + "\\Configs\\base.config";
-                }
-                else if (System.IO.Directory.Exists("configs"))
-                {
-                    config.AppSettings.File = Environment.CurrentDirectory + "\\configs\\base.config";
-                }
-                //config.AppSettings.File = "base.config";
-                config.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection("appSettings");
-
-    //                <add key="SVNSource" value="http://svn.keybookserver.com:8080/svn/photosm-dev.keybook.com/" />
-    //<add key="SVNDestination" value="" />
-    //<add key="SVNUserName" value="keybook" />
-    //<add key="SVNCreateSVNTag" value="false" />
-    //<add key="MySqlHost" value="209.171.112.120" />
-    //<add key="MySqlUser" value="kbergeron" />
-    //<add key="MySqlDatabase" value="photosm" />
-    //<add key="SSHHost" value="209.171.112.107" />
-    //<add key="SSHUser" value="photosm.keybook.com" />
             }
         }
 
