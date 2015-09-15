@@ -84,7 +84,6 @@ namespace OneClickToProd
                 {
                     config.AppSettings.File = Environment.CurrentDirectory + "\\configs\\base.config";
                 }
-                //config.AppSettings.File = "base.config";
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
             }
