@@ -45,6 +45,8 @@ namespace OneClickToProd
 
         private static void loadConfigFile(string[] args)
         {
+            var configPath = getConfigPath();
+
             if (args.Any(a => a.Contains("config")))
             {
                 var splitter = new[] { "=" };
@@ -55,10 +57,11 @@ namespace OneClickToProd
                     runtimeconfigfile = runtimeconfigfile + ".config";
                 }
 
-                if(System.IO.Directory.Exists("Configs")){
-                    runtimeconfigfile = Environment.CurrentDirectory + "\\Configs\\" + runtimeconfigfile;
-                } else if(System.IO.Directory.Exists("configs")) {
-                    runtimeconfigfile = Environment.CurrentDirectory + "\\configs\\" + runtimeconfigfile;
+                //The file pass in parameter migth be with a path. 
+                //If it's the case we should keep it otherwise add the path to the default location of config file
+                if (!System.IO.File.Exists(runtimeconfigfile))
+                {
+                    runtimeconfigfile = configPath + runtimeconfigfile;
                 }
 
                 if (System.IO.File.Exists(runtimeconfigfile))
@@ -75,17 +78,29 @@ namespace OneClickToProd
             }
             else
             {
+                var runtimeconfigfile = configPath + "\\base.config";
+
                 System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                if (System.IO.Directory.Exists("Configs"))
-                {
-                    config.AppSettings.File = Environment.CurrentDirectory + "\\Configs\\base.config";
-                }
-                else if (System.IO.Directory.Exists("configs"))
-                {
-                    config.AppSettings.File = Environment.CurrentDirectory + "\\configs\\base.config";
-                }
+                config.AppSettings.File = runtimeconfigfile;
+
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
+            }
+        }
+
+        private static string getConfigPath()
+        {
+            if (System.IO.Directory.Exists("Configs"))
+            {
+                return Environment.CurrentDirectory + "\\Configs\\";
+            }
+            else if (System.IO.Directory.Exists("configs"))
+            {
+                return Environment.CurrentDirectory + "\\configs\\";
+            }
+            else
+            {
+                return string.Empty;
             }
         }
 
