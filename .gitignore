@@ -47,3 +47,9 @@ Temporary Items
 */bin/Release/configs/*.config
 !*/bin/Release/configs/base.config
 !*/bin/Debug/configs/base.config
+
+#config file that are alway overwritten on execution
+*/bin/Debug/OneClickToProd.exe.[cC]onfig
+*/bin/Debug/OneClickToProd.vshost.exe.[cC]onfig
+*/bin/Release/OneClickToProd.exe.[cC]onfig
+*/bin/Release/OneClickToProd.vshost.exe.[cC]onfig
