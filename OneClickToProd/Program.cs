@@ -185,9 +185,14 @@ namespace OneClickToProd
             {
                 Console.WriteLine(Resources.Questions.SSHUser);
                 userName = Console.ReadLine();
+                
+                Console.WriteLine(Resources.Questions.SSHPassword);
             }
-
-            Console.WriteLine(Resources.Questions.SSHPassword);
+            else
+            {
+                Console.WriteLine(string.Format(Resources.Questions.SSHPasswordWithUserName, userName));
+            }
+            
             using (SecureString password = GetPassword())
             {
                 using (SshClient client = new SshClient(host, userName, password.ConvertToUnsecureString()))
@@ -219,9 +224,15 @@ namespace OneClickToProd
             {
                 Console.WriteLine(Resources.Questions.SVNUser);
                 userName = Console.ReadLine();
+                
+                Console.WriteLine(Resources.Questions.SVNPassword);
+            }
+            else
+            {
+                Console.WriteLine(string.Format(Resources.Questions.SVNPasswordWithUserName, userName));
             }
 
-            Console.WriteLine(Resources.Questions.SVNPassword);
+            
             using (SecureString password = GetPassword())
             {
                 client.RunCommand(string.Format(Program.SVNCommand, userName, password.ConvertToUnsecureString()));
@@ -253,19 +264,23 @@ namespace OneClickToProd
                 mysqlHost = Console.ReadLine();
             }
 
-            if (mysqlUser.isNullOrEmpty())
-            {
-                Console.WriteLine(Resources.Questions.MySQLUser);
-                mysqlUser = Console.ReadLine();
-            }
-
             if (mysqlDatabase.isNullOrEmpty())
             {
                 Console.WriteLine(Resources.Questions.MySQLDatabase);
                 mysqlDatabase = Console.ReadLine();
             }
 
-            Console.WriteLine(Resources.Questions.MySQLPassword);
+            if (mysqlUser.isNullOrEmpty())
+            {
+                Console.WriteLine(Resources.Questions.MySQLUser);
+                mysqlUser = Console.ReadLine();
+
+                Console.WriteLine(Resources.Questions.MySQLPassword);
+            }
+            else
+            {
+                Console.WriteLine(string.Format(Resources.Questions.MySQLPasswordWithUserName, mysqlUser));
+            }
 
             var connexionString = string.Empty;
             using (SecureString mysqlPassword = GetPassword())

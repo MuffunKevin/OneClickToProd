@@ -154,5 +154,32 @@ namespace OneClickToProd.Resources {
                 return ResourceManager.GetString("SVNDestination", resourceCulture);
             }
         }
+
+
+        internal static string SSHPasswordWithUserName
+        {
+            get
+            {
+                return ResourceManager.GetString("SSHPasswordWithUserName", resourceCulture);
+            }
+        }
+
+
+        internal static string SVNPasswordWithUserName
+        {
+            get
+            {
+                return ResourceManager.GetString("SVNPasswordWithUserName", resourceCulture);
+            }
+        }
+
+
+        internal static string MySQLPasswordWithUserName
+        {
+            get
+            {
+                return ResourceManager.GetString("MySQLPasswordWithUserName", resourceCulture);
+            }
+        }
     }
 }
