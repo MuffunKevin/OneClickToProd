@@ -126,6 +126,9 @@
   <data name="MySQLPassword" xml:space="preserve">
     <value>Quel est le mot de passe de la base de données?</value>
   </data>
+  <data name="MySQLPasswordWithUserName" xml:space="preserve">
+    <value>Quel est le mot de passe de la base de données ({0})?</value>
+  </data>
   <data name="MySQLUser" xml:space="preserve">
     <value>Quel est le nom d'usager de la base de données?</value>
   </data>
@@ -135,6 +138,9 @@
   <data name="SSHPassword" xml:space="preserve">
     <value>Quel est le mot de passe SSH?</value>
   </data>
+  <data name="SSHPasswordWithUserName" xml:space="preserve">
+    <value>Quel est le mot de passe SSH ({0})?</value>
+  </data>
   <data name="SSHUser" xml:space="preserve">
     <value>Quel est le nom d'usager SSH?</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="SVNPassword" xml:space="preserve">
     <value>Quel est le mot de passe SVN?</value>
+  </data>
+  <data name="SVNPasswordWithUserName" xml:space="preserve">
+    <value>Quel est le mot de passe SVN ({0})?</value>
   </data>
   <data name="SVNSource" xml:space="preserve">
     <value>Quelle est l'adresse de source du SVN?</value>
